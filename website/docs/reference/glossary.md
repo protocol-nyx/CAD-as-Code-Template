@@ -95,3 +95,81 @@ See [OCP CAD Viewer](/getting-started/ocp-viewer) and [OCP on GitHub](https://gi
 Decorators and CLI tools for discovering, describing, and exporting manufacturing artifacts from code.
 
 See [MakerRepo](/tools/makerrepo).
+
+## Reference asset
+
+An external file used to inform a model without becoming the editable source of truth. Examples include a supplier STEP file, scanned STL, product photo, SVG outline, or measured drawing.
+
+See [Reference assets](/modeling/reference-assets).
+
+## Raster image
+
+An image stored as a grid of pixels, such as PNG, JPG, BMP, TIFF, screenshots, scans, and photos. Raster images are useful references, but they do not carry editable CAD curves or dimensions by themselves.
+
+See [Reference assets](/modeling/reference-assets#raster-images-pixels-as-calibrated-references), [Pillow](https://pillow.readthedocs.io/), and [OpenCV](https://docs.opencv.org/).
+
+## Rasterization
+
+The process of converting vector or 3D information into pixels. Rasterization is useful for display and screenshots, but it discards CAD topology, parametric history, and exact curves unless those are preserved separately.
+
+See [Reference assets](/modeling/reference-assets#raster-images-pixels-as-calibrated-references).
+
+## Vectorization
+
+The process of converting raster pixels into vector paths. In this workflow, vectorization usually means tracing a bitmap into SVG or DXF before importing it as 2D CAD reference geometry.
+
+See [Potrace](https://potrace.sourceforge.net/) and [Inkscape Trace Bitmap](https://inkscape-manuals.readthedocs.io/en/latest/tracing-an-image.html).
+
+## Thresholding
+
+An image-processing step that separates pixels into groups, often foreground and background, so edges or regions can be extracted.
+
+See [OpenCV](https://docs.opencv.org/) and [scikit-image measure](https://scikit-image.org/docs/stable/api/skimage.measure.html).
+
+## Contour
+
+A line following the boundary of a region or a constant-value boundary in an image. Contours are useful when converting a silhouette, scan, or drawing into vector-like geometry.
+
+See [scikit-image contour finding](https://scikit-image.org/docs/stable/auto_examples/edges/plot_contours.html).
+
+## Calibration
+
+The act of tying image pixels, scan points, or imported geometry to real-world dimensions and orientation. Calibration can use known dimensions, a ruler in the image, datum features, or a documented transform.
+
+See [Reference assets](/modeling/reference-assets#suggested-repository-pattern).
+
+## Mesh
+
+A surface represented by vertices, edges, and faces, usually triangles. STL, OBJ, PLY, and many GLB files are mesh formats.
+
+See [trimesh](https://trimesh.org/) and [Reference assets](/modeling/reference-assets#stl-obj-ply-glb-and-scanned-meshes-triangle-references).
+
+## Watertight mesh
+
+A closed mesh with no holes, cracks, or boundary leaks. Volume and inside/outside tests are only reliable when the mesh is watertight enough for the calculation being performed.
+
+See [trimesh](https://trimesh.org/).
+
+## Point cloud
+
+A set of unconnected 3D sample points, often produced by 3D scanning or photogrammetry. Point clouds usually need cleanup, registration, and surface reconstruction before they are useful as CAD references.
+
+See [Open3D point clouds](https://www.open3d.org/docs/0.19.0/python_api/open3d.geometry.PointCloud.html).
+
+## Registration
+
+The process of aligning one geometry dataset to another, such as fitting a scan to a model coordinate system.
+
+See [Open3D ICP registration](https://www.open3d.org/docs/0.19.0/tutorial/pipelines/icp_registration.html).
+
+## ICP
+
+Iterative Closest Point. A registration method that refines the alignment between two point clouds or sampled surfaces by repeatedly matching nearby points and updating the transform.
+
+See [Open3D ICP registration](https://www.open3d.org/docs/0.19.0/tutorial/pipelines/icp_registration.html).
+
+## Tolerance
+
+The accepted difference between generated geometry and a reference target. In reference-asset tests, tolerance should be written down in the asset manifest so pass/fail behavior is reviewable.
+
+See [Testing strategy](/modeling/testing) and [Reference assets](/modeling/reference-assets#automation-ideas).
